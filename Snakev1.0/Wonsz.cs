@@ -22,12 +22,13 @@ namespace Snakev1._0
         public int YJabka { get; set; }
 
         Queue dlugiWonsz = new Queue();
+        Plansza plansza = new Plansza();
 
         
 
         public void RysujWonsza()
         {
-            dlugiWonsz.Enqueue((WonszX +";"+WonszY).ToString());
+            dlugiWonsz.Enqueue((WonszX + ";" + WonszY).ToString());
 
             if (dlugiWonsz.Count > DlugoscWonsza)
             {
@@ -36,10 +37,7 @@ namespace Snakev1._0
                 string yyTekstowo = usunieteWspolrzedne.Substring(usunieteWspolrzedne.IndexOf(";") + 1);
 
                 Console.SetCursorPosition(Convert.ToInt32(xxTekstowo), Convert.ToInt32(yyTekstowo));
-                Console.Write(" ");
-
-
-                // tutaj ma skasować znaka jako ostatniego
+                Console.Write(" ");// kasowanie ogonka
             }
 
             SprawdzKolizjeWonsza(); //rozszerzyć o kolizję wonsza z wonszem
@@ -56,16 +54,10 @@ namespace Snakev1._0
                  string xxTekstowo = tekstowo.Substring(0, tekstowo.IndexOf(";"));
                  string yyTekstowo = tekstowo.Substring(tekstowo.IndexOf(";") + 1);
 
-                
-                
-              
-
                 Console.SetCursorPosition(Convert.ToInt32(xxTekstowo), Convert.ToInt32(yyTekstowo));
                 Console.Write("*");
             }
           
-
-
             Thread.Sleep(PredkoscWonsza);
         }
 
@@ -77,16 +69,39 @@ namespace Snakev1._0
 
         public void SprawdzKolizjeWonsza()
         {
-            if (WonszX < 1) KoniecGry();
-            if (WonszY < 1) KoniecGry();
-            if (WonszX > SzerokoscPlanszy - 2) KoniecGry();//WonszX = SzerokoscPlanszy - 2;
-            if (WonszY > WysokoscPlanszy) KoniecGry();
+            // kolizja z ramami planszy
+            if ((WonszX < 1) || (WonszY < 1) || (WonszX > SzerokoscPlanszy - 2) || (WonszY > WysokoscPlanszy)) KoniecGry();
 
+            //sprawdzenie kolizji wonsza z himself
+            int a = 1;
+            foreach (var wszystkieWspolrzedneWonsza in dlugiWonsz)
+            {
+                string wspolrzedne = wszystkieWspolrzedneWonsza.ToString();
+                int x = Convert.ToInt32(wspolrzedne.Substring(0, wspolrzedne.IndexOf(";")));
+                int y = Convert.ToInt32(wspolrzedne.Substring(wspolrzedne.IndexOf(";") + 1));
+
+                if (a > 1)
+                {
+                   // if (x == WonszX && y == WonszY && DlugoscWonsza > 1) KoniecGry();
+                }
+
+                a++;
+
+
+
+            }
+
+
+            // zjedzenie jabka
             if ((WonszX == XJabka) && (WonszY == YJabka))
             {
                 DlugoscWonsza++;
                 LosujJabko();
                 if (PredkoscWonsza > 100) PredkoscWonsza -= 10;
+                plansza.SzerokoscPlanszy = SzerokoscPlanszy;
+                plansza.WysokoscPlanszy = WysokoscPlanszy;
+                plansza.Punkty = DlugoscWonsza;
+                plansza.RysujPunkty();
             }
 
             

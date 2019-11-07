@@ -10,8 +10,9 @@ namespace Snakev1._0
     {
         public int SzerokoscPlanszy { get; set; }
         public int WysokoscPlanszy { get; set; }
+        public int Punkty { get; set; }
 
-        
+
         public void RysujPlansze()
         {
             for (int i = 0; i < SzerokoscPlanszy; i++)
@@ -35,6 +36,15 @@ namespace Snakev1._0
                 Console.Write("*");
             }
 
+        }
+
+        public void RysujPunkty()
+        {
+            string punkty = "Punkty: " + Punkty.ToString();
+            Console.SetCursorPosition((SzerokoscPlanszy - punkty.Length)/2, WysokoscPlanszy + 2);
+            Console.WriteLine("         ");
+            Console.SetCursorPosition((SzerokoscPlanszy - punkty.Length) / 2, WysokoscPlanszy + 2);
+            Console.WriteLine(punkty);
         }
 
         
