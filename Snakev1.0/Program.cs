@@ -40,7 +40,6 @@ namespace Snakev1._0
 
             while (true)
             {
-                
 
                 if (Console.KeyAvailable)
                 {
