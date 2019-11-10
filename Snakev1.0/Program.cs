@@ -11,9 +11,9 @@ namespace Snakev1._0
     {
         static void Main(string[] args)
         {
-            int szerokoscPlanszy = 50;
-            int wysokoscPlanszy = 15;
-            int dlugoscWonsza = 10;
+            int szerokoscPlanszy = 20;
+            int wysokoscPlanszy = 20;
+            int dlugoscWonsza = 1;
             int kierunekXWonsza = 1;
             int kierunekYWonsza = 0;
             int wonszX = szerokoscPlanszy / 2;
